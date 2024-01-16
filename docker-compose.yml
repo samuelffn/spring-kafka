@@ -57,13 +57,13 @@ networks:
     driver: bridge # o driver foi definido como bridge
 
 
-### Para executar omeu arquivo ###
+### Para executar o arquivo ###
 
 # Necessário ter o docker desktop instalado e rodando na máquina
 # Comando para subir: 'docker-compose up' ou 'docker compose up' (sem o hífem "-", vai depender da versão instalada na máquina)
 # Para parar basta usar um: Ctrl + c
 # Para executar e deixar o terminal liberado: 'docker-compose up -d' ou 'docker compose up -d'
-# Para parar usar o comando: 'docker-compose up down' ou 'docker compose up down'
+# Para parar usar o comando: 'docker-compose down' ou 'docker compose down'
 
 
 ## Testando o Kafdrop ##
