@@ -1,2 +1,2 @@
-# spring-kafka
-Projeto para estudo do Kafka utilizando Spring boot.
+# str-producer
+Projeto Spring boot para aprender a utilização básica do kafka.
