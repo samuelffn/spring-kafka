@@ -18,7 +18,7 @@ public class KafkaAdminConfig {
 
     /**
      * Com este método aqui teremos um kafka admin configurado para fazer a cominicação
-     * com o kafka cluster (o que está rodando via docker: localhost:19000.
+     * com o kafka cluster (o que está rodando via docker: localhost:19000).
      * */
     @Bean //O @Bean para que esse método seja executado todas as vezes que a aplicação for executada
     public KafkaAdmin kafkaAdmin() {

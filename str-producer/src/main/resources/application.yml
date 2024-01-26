@@ -3,4 +3,4 @@ server:
 spring:
   kafka:
     producer:
-      bootstrap-servers: localhost:29092 # Observe no arquivo docker-compose que � a porta onde configuramos pro kafka rodar
+      bootstrap-servers: localhost:29092 # Observe no arquivo docker-compose que é a porta onde configuramos pro kafka rodar
