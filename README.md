@@ -1,5 +1,5 @@
 # spring-kafka
-Projeto para estudo do Kafka utilizando Spring boot e docker-compose.  
+Projeto para estudo do Kafka utilizando Spring boot e docker-compose. Curso da Udemy.  
   
 ## Docker Compose  
 Necessário ter o docker desktop instalado e rodando na máquina  
@@ -8,7 +8,7 @@ Para parar basta usar um: Ctrl + c
 Para executar e deixar o terminal liberado: 'docker-compose up -d' ou 'docker compose up -d'  
 Para parar usar o comando: 'docker-compose down' ou 'docker compose down'  
   
-### Testando o Kafdrop  
+## Testando o Kafdrop  
 Abre o navegador e digita: localhost:19000  
   
 ## Aplicação Spring  
