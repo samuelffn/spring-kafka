@@ -1,5 +1,6 @@
 # spring-kafka
 Projeto para estudo do Kafka utilizando Spring boot e docker-compose. Curso da Udemy.  
+Estaremos trabalhando em dois projetos (microsserviços): **str-producer** e **str-consumer**.
   
 ## Docker Compose  
 Necessário ter o docker desktop instalado e rodando na máquina  

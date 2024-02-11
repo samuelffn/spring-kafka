@@ -1,0 +1,7 @@
+server:
+  port: 8100  # Definindo a porta em que este serviço irá rodar
+# Assim como o str-producer tinha um bootstrap server definido, vamos definir pro consumer também
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:29092
