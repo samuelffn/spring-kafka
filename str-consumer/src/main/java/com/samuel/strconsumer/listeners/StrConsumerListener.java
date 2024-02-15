@@ -24,3 +24,15 @@ public class StrConsumerListener {
         log.info("Receive message {}", message); // Vamos logar informando que recebemos a mensagem
     }
 }
+
+/**
+ * *Obs.: Antes de enviar a primeira mensagem. Ao olhar os logs, podemos notar o seguinte:
+ * Como nós temos apenas 1 grupo de consumidor, note que ele se registrou nas partições 0 e 1 (Teremos este log:
+ * group-1: partitions assigned: [str-topic-0, str-topic-1]), ou seja, ele está consumindo mensagens das duas partições.
+ *
+ * * Enviando as mensagens:
+ * - Agora, abra o Insomnia/Postman e faça o envio de uma mensagem (POST - localhost:8000/producer)
+ * - Olhe os logs nos dois microsserviços, Producer e Consumer
+ * - Observe que um mostra que a mensagem foi enviada enquanto que o outro mostra que foi recebida
+ * - Agora abra o kafdrop (Abre o navegador e digita: localhost:19000) e observe nossas mensagens nele.
+ * */
