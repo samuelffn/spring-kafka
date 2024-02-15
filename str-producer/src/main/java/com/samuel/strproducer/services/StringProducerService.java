@@ -32,10 +32,11 @@ public class StringProducerService {
         // No método send precisamos informar:
         // * O tópico (que será aquele tópico que criamos, o str-topic)
         // * A mensagem, que nesse caso recebemos como parâmetro
-        //kafkaTemplate.send("str-topic", message);
+        log.info("Send message {}", message); // Vamos logar informando que enviamos a mensagem
+        kafkaTemplate.send("str-topic", message);
 
         // Usando callback e utilizando logs com informações de Cluster ID, partition, Offset...
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("str-topic", message);
+        /*CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send("str-topic", message);
         future.whenComplete((result, ex) -> {
             if (ex != null) {
                 log.error("Error sending message: {}", ex.getMessage());
@@ -47,7 +48,7 @@ public class StringProducerService {
                     result.getRecordMetadata().partition(),
                     result.getRecordMetadata().offset()
             );
-        });
+        });*/
     }
 
 }

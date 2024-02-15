@@ -21,6 +21,6 @@ public class StrConsumerListener {
      * */
     @KafkaListener(groupId = "group-1", topics = "str-topic", containerFactory = "strContainerFactory")
     public void listener(String message) {
-        log.info("Receive message {}", message);
+        log.info("Receive message {}", message); // Vamos logar informando que recebemos a mensagem
     }
 }
