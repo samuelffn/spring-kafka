@@ -2,6 +2,7 @@ package com.samuel.strconsumer.listeners;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +20,7 @@ public class StrConsumerListener {
      * containerFactory = definir onde faremos a leitura das nossas mensagens, que será o "strContainerFactory",
      * método que foi criado em StringConsumerConfig.
      * */
-    @KafkaListener(groupId = "group-1", topics = "str-topic", containerFactory = "strContainerFactory")
+    /*@KafkaListener(groupId = "group-1", topics = "str-topic", containerFactory = "strContainerFactory")
     public void create(String message) {
         log.info("CREATE ::: Receive message {}", message); // Vamos logar informando que recebemos a mensagem
     }
@@ -27,11 +28,31 @@ public class StrConsumerListener {
     @KafkaListener(groupId = "group-2", topics = "str-topic", containerFactory = "strContainerFactory")
     public void log(String message) {
         log.info("LOG ::: Receive message {}", message); // Vamos logar informando que recebemos a mensagem
-    }
+    }*/
 
     @KafkaListener(groupId = "group-3", topics = "str-topic", containerFactory = "strContainerFactory")
     public void history(String message) {
         log.info("HISTORY ::: Receive message {}", message); // Vamos logar informando que recebemos a mensagem
+    }
+
+    @KafkaListener(
+            groupId = "group-1",
+            topicPartitions = {
+                    @TopicPartition(topic = "str-topic", partitions = {"0"}) // Defindo em qual partição vai ficar. POderia receber um array aqui
+            },
+            containerFactory = "strContainerFactory")
+    public void create(String message) {
+        log.info("CREATE ::: Receive message {}", message); // Vamos logar informando que recebemos a mensagem
+    }
+
+    @KafkaListener(
+            groupId = "group-1",
+            topicPartitions = {
+                    @TopicPartition(topic = "str-topic", partitions = {"1"}) // Defindo em qual partição vai ficar. POderia receber um array aqui
+            },
+            containerFactory = "strContainerFactory")
+    public void log(String message) {
+        log.info("LOG ::: Receive message {}", message); // Vamos logar informando que recebemos a mensagem
     }
 }
 
@@ -45,12 +66,13 @@ public class StrConsumerListener {
  * - Olhe os logs nos dois microsserviços, Producer e Consumer
  * - Observe que um mostra que a mensagem foi enviada enquanto que o outro mostra que foi recebida
  * - Agora abra o kafdrop (Abre o navegador e digita: localhost:19000) e observe nossas mensagens nele.
+ * - O Kafka quem decide em qual partição a mensagem vai cair.
  * */
 
 /**
- * *Obse.2: Sobre conseito de grupos de consumo.
+ * *Obs.2: Sobre conseito de grupos de consumo.
  * - Quando criamos o nosso tópico (str-topico) no Producer, nós definimos que ele teria 2 partições (0 e 1). Quando criamos um tópico,
- * por padrão ele de ter no mínimo 1 partição. Se não definirmos a quantodade de partições, o Kafka criará 1 partição.
+ * por padrão ele de ter no mínimo 1 partição. Se não definirmos a quantidade de partições, o Kafka criará 1 partição.
  * - Aqui nessa classe, quando tínhamos apenas o método listener, ele tinha se registrado nos dois grupos (lembre do log:
  * group-1: partitions assigned: [str-topic-0, str-topic-1]), ou seja, ele está consumindo mensagens das duas partições)
  * - Para conseguirmos explicar, vamos renomear ele para create
@@ -67,4 +89,19 @@ public class StrConsumerListener {
  *  * - Olhe os logs:
  *  *  - Obseve que nenhum método ficará sem partição
  *  *  - As mensagens chagarão nos três grupos
+ * */
+
+/**
+ * Obs.3: Escilhendo uma partição para receber as mensagens
+ * - Se não for definida a partição que a mensagem chegará, o kafka se encarrega de escolher a partição
+ * - Podemos usar a propriedade topicPartitions para definir em qual partição as mensagens chegarão para o meu listener
+ * - Não podemos definir mais partições do que a quantidade que temos
+ * - Para conseguir testar, vamos usar o mesmo grupo
+ * - Observe nos logs que ele vai mostrar que os tópicos ficaram registrados nas suas partições.
+ * Ex.:
+ * Resetting oofset for partition str-topic-0
+ * Resetting oofset for partition str-topic-1
+ * - Abra o Insomnia e faça um teste
+ * - Abra o Kafdrop e veja em qual partição a mensagem chegou.
+ *  - Se chegar na 0, então deveremos ver os logs do create (que foi onde definimos que seria a partição 0)
  * */
