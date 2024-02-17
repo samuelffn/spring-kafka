@@ -125,7 +125,22 @@ public class StrConsumerListener {
         log.info("LOG ::: Receive message {}", message);
     }
 
+    /*
     @StrConsumerCustomListener(groupId = "group-2")
+    public void history(String message) {
+        log.info("HISTORY ::: Receive message {}", message);
+    }
+    */
+
+    /**
+     * Vamos usar esse litener para exemplificar o uso de interceptor nas mensagens recebidas
+     * - Primeiro vamos voltar a anotaao do @KafkaListener para modificarmos o containerFactory
+     * - Vamos informar o novo container factory
+     * - Observe os logs após enviar uma mensagem:
+     *  - Use Teste (com o E) na mensagem (mostrará que foi interceptada)
+     *  - Use Test (sem o E) na mensagem (não mostrará que foi interceptada)
+     * */
+    @KafkaListener(groupId = "group-2", topics = "str-topic", containerFactory = "validMessageContainerFactory")
     public void history(String message) {
         log.info("HISTORY ::: Receive message {}", message);
     }
